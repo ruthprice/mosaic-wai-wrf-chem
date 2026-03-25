@@ -2,3 +2,4 @@ figures/*
 .devcontainer
 __pycache__
 wrfpp.py
+.DS_Store
