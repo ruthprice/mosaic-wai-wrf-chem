@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "WRF-Chem-Polar MOSAiC WAI case study"
-version: 1.8.0
+version: 1.0
 license: "GPL-3.0"
 type: software
 abstract: "These are the scripts and notebooks used to reproduce the figures in Price et al 2026 (in prep)."
