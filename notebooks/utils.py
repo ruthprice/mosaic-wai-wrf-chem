@@ -1,4 +1,25 @@
 import numpy as np
+import pyproj
+
+def extract_point_from_grid(lons, lats, target_lon, target_lat):
+    '''
+    For a single lat, lon point given by point_coords, function returns the indices of
+    the closest point from gridded data output, using pyproj package.
+    lons, lats: arrays of lon and lat grid to extract from. must have same length
+    target_lon, target_lat: floats of coordinates to extract
+    inds_min_dist: tuple of indices corresponding to a grid cell in gridded data
+                   with minimum distance to target. coords are given as
+                   (j, i).
+    '''
+    geod = pyproj.Geod(ellps="WGS84")
+    _, _, dists = geod.inv(
+        np.full(lons.shape, target_lon),
+        np.full(lats.shape, target_lat),
+        lons,
+        lats,
+    )
+    inds_min_dist = np.unravel_index(np.argmin(dists), lons.shape)
+    return inds_min_dist
 
 def calc_mosaic_size_bins(nbins=4, verbose=False):
     # Constants (from WRF-Chem logic)
